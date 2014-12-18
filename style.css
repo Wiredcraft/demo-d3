@@ -1,0 +1,29 @@
+.province {
+  fill: none;
+  stroke: #aaa;
+  stroke-width: 0.2px;
+  stroke-linejoin: round;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: 18px;
+  padding: 2px;
+  font-size: 10px;
+  background: #FFFFE0;
+  border: 1px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges;
+}
+.axis text {
+  font-family: sans-serif;
+  font-size: 11px;
+}
