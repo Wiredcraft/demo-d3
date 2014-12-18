@@ -1,5 +1,6 @@
 var w = 800
 var h = 850
+var tooltip
 var margin = 40
 
 d3.csv('data/population.csv', function(data) {
@@ -125,6 +126,35 @@ d3.csv('data/population.csv', function(data) {
       })
       .attr('width', function (d) {
         return xScale(d.x) || 0
+      })
+      .on('mouseover', function(d) {
+        d3.select('body').selectAll('div.tooltip').remove()
+        tooltip = d3.select('body').append('div')
+          .attr('class', 'tooltip')
+          .classed('img', true)
+          .style('opacity', 0)
+      })
+      .on('mousemove', function(d) {
+
+        tooltip.transition().duration(300)
+          .style('opacity', 1)
+
+        var bodyNode = d3.select('body').node()
+        var absoluteMousePos = d3.mouse(bodyNode)
+        var content
+        if (d.x0 === 0) {
+          content = '<img src="images/male.png" /><span>' + d.x + '</span>'
+        } else {
+          content = '<img src="images/female.png" /><span>' + d.x + '</span>'
+        }
+
+        tooltip.html(content)
+        .style('left', (absoluteMousePos[0] + 10) + 'px')
+        .style('top', (absoluteMousePos[1] - 25) + 'px')
+      })
+      .on('mouseout', function() {
+        tooltip.transition().duration(300)
+          .remove()
       })
 
     svg.append('g')

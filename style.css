@@ -5,17 +5,32 @@
   stroke-linejoin: round;
 }
 
-div.tooltip {
+.tooltip {
   position: absolute;
   text-align: center;
-  width: 100px;
-  height: 18px;
+  width: 110px;
+  height: 24px;
+  line-height: 24px;
   padding: 2px;
-  font-size: 10px;
-  background: #FFFFE0;
-  border: 1px;
-  border-radius: 2px;
+  background: #fff;
+  font-size: 14px;
+  border: 1px solid #ccc;
   pointer-events: none;
+}
+
+.tooltip.img {
+  width: 85px;
+}
+
+.tooltip img {
+  height: 24px;
+  float: left;
+}
+.tooltip span {
+  height: 24px;
+  margin-top: 2px;
+  margin-left: 4px;
+  float: left;
 }
 
 .axis path, .axis line {

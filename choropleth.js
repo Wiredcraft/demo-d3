@@ -42,7 +42,7 @@ var Choropleth = function(json, options) {
         .style('opacity', 1)
 
       var absoluteMousePos = d3.mouse(bodyNode)
-      tooltip.text(d.properties.name + ' : ' + d.properties.total)
+      tooltip.html('<span>' + d.properties.name + ' : ' + d.properties.total + '</span>')
         .style('left', (absoluteMousePos[0] + 10) + 'px')
         .style('top', (absoluteMousePos[1] - 25) + 'px')
     })
