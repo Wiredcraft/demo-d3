@@ -69,6 +69,17 @@ text {
   stroke-width: 3px;
 }
 
+.line.gradient {
+  stroke: url(#aqi-gradient);
+}
+
 .line.above {
   stroke: #f00;
+}
+
+form {
+  position: relative;
+  top: 520px;
+  left: 20px;
+  font-size: 12px;
 }
