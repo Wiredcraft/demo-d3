@@ -67,6 +67,7 @@ d3.csv('data/population.csv', function(data) {
 
     var width = w - 2 * margin
     var height = h - 2 * margin
+    var formatNumber = d3.format(",f")
 
     var svg = d3.select('body')
       .append('svg')
@@ -143,9 +144,9 @@ d3.csv('data/population.csv', function(data) {
         var absoluteMousePos = d3.mouse(bodyNode)
         var content
         if (d.x0 === 0) {
-          content = '<img src="images/male.png" /><span>' + d.x + '</span>'
+          content = '<img src="images/male.png" /><span>' + formatNumber(d.x) + '</span>'
         } else {
-          content = '<img src="images/female.png" /><span>' + d.x + '</span>'
+          content = '<img src="images/female.png" /><span>' + formatNumber(d.x) + '</span>'
         }
 
         tooltip.html(content)

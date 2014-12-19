@@ -8,7 +8,7 @@
 .tooltip {
   position: absolute;
   text-align: center;
-  width: 110px;
+  width: 115px;
   height: 24px;
   line-height: 24px;
   padding: 2px;
@@ -41,4 +41,34 @@
 .axis text {
   font-family: sans-serif;
   font-size: 11px;
+}
+
+body {
+  margin: auto;
+  width: 960px;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.line.above {
+  stroke: #f00;
 }

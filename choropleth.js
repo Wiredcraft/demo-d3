@@ -1,15 +1,22 @@
-var formatNumber = d3.format(",f")
-var bodyNode = d3.select('body').node()
-
+/**
+ * Build the choropleth
+ * @param {Object} json    The data
+ * @param {Object} options The options for the chart
+ */
 var Choropleth = function(json, options) {
   var container = options.container || 'body'
   var projection = options.projection
   var w = options.width || 960
   var h = options.height || 600
-  var colorScale = options.colorScale
+  var domain = options.domain
   var colors = options.colors
   var path = options.path
+  var formatNumber = d3.format(",f")
+
   var tooltip
+  var colorScale = d3.scale.quantize()
+    .range(colors)
+    .domain(domain)
 
   var svg = d3.select(container)
     .append('svg')
@@ -17,10 +24,10 @@ var Choropleth = function(json, options) {
     .attr('height', h)
 
   svg.selectAll('path')
-    .attr('class', 'province')
     .data(json.features)
     .enter()
     .append('path')
+    .attr('class', 'province')
     .attr('d', path)
     .style('fill', function(d) {
       var total = d.properties.total
@@ -31,18 +38,18 @@ var Choropleth = function(json, options) {
       }
     })
     .on('mouseover', function(d) {
+      d3.select(this).transition().duration(300).style('opacity', 1)
       d3.select('body').selectAll('div.tooltip').remove()
       tooltip = d3.select('body').append('div')
         .attr('class', 'tooltip')
         .style('opacity', 0)
     })
     .on('mousemove', function(d) {
-      d3.select(this).transition().duration(300).style('opacity', 1)
-      tooltip.transition().duration(300)
-        .style('opacity', 1)
+      tooltip.transition().duration(300).style('opacity', 1)
 
+      var bodyNode = d3.select('body').node()
       var absoluteMousePos = d3.mouse(bodyNode)
-      tooltip.html('<span>' + d.properties.name + ' : ' + d.properties.total + '</span>')
+      tooltip.html('<span>' + d.properties.name + ' : ' + formatNumber(d.properties.total) + '</span>')
         .style('left', (absoluteMousePos[0] + 10) + 'px')
         .style('top', (absoluteMousePos[1] - 25) + 'px')
     })
@@ -68,9 +75,7 @@ var Choropleth = function(json, options) {
     .attr('y', function(d, i) { return h - (i*ls_h) - 2*ls_h })
     .attr('width', ls_w)
     .attr('height', ls_h)
-    .style('fill', function(d) {
-      return d
-    })
+    .style('fill', function(d) { return d })
 
   legend.append('text')
     .attr('x', 50)
@@ -80,16 +85,8 @@ var Choropleth = function(json, options) {
     })
 }
 
-var w = 960
-var h = 600
-var colors = ['rgb(237,248,233)', 'rgb(186,228,179)', 'rgb(116,196,118)', 'rgb(49,163,84)','rgb(0,109,44)']
-var projection = d3.geo.mercator().center([105, 38]).scale(750).translate([w/2, h/2])
-var path = d3.geo.path().projection(projection)
-var colorScale = d3.scale.quantize().range(colors)
-
+// Prepare the data and render the graph
 d3.csv('data/population.csv', function(data) {
-  colorScale.domain([ d3.min(data, function(d) { return d.total }), d3.max(data, function(d) { return d.total })])
-
   d3.json('data/china_provinces.json', function(json) {
     for (var i = 0; i < data.length; i++) {
       var dataProvince = data[i].name
@@ -107,17 +104,19 @@ d3.csv('data/population.csv', function(data) {
       }
     }
 
-    // draw the choropleth
+    var w = 960
+    var h = 600
+    var projection = d3.geo.mercator().center([105, 38]).scale(750).translate([w/2, h/2])
+    var path = d3.geo.path().projection(projection)
+
     Choropleth(json, {
       container: 'body',
-      colorScale: colorScale,
+      domain: [ d3.min(data, function(d) { return d.total }), d3.max(data, function(d) { return d.total })],
       width: w,
       height: h,
       path: path,
-      colors: colors
+      colors: ['rgb(237,248,233)', 'rgb(186,228,179)', 'rgb(116,196,118)', 'rgb(49,163,84)','rgb(0,109,44)']
     })
 
   })
-
 })
-

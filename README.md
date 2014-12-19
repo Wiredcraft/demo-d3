@@ -15,6 +15,10 @@ Live Demo:
 
 ![screen shot 2014-12-18 at 2 39 23](https://cloud.githubusercontent.com/assets/1183541/5484437/b6525b02-86c3-11e4-9030-838120aab984.png)
 
+### Shanghai December AQI
+
+![screen shot 2014-12-19 at 5 49 29](https://cloud.githubusercontent.com/assets/1183541/5502627/eae56910-87a7-11e4-8604-0c0709c53836.png)
+
 ### 数据来源
 
 * 人口数据 [第六次人口普查数据 - 各地区户数、人口数和性别比](http://www.stats.gov.cn/tjsj/pcsj/rkpc/6rp/indexce.htm)
@@ -22,3 +26,4 @@ Live Demo:
 * [澳门人口](http://zh.wikipedia.org/wiki/%E6%BE%B3%E9%96%80%E4%BA%BA%E5%8F%A3)
 * [台湾人口](http://www.ris.gov.tw/zh_TW/346)
 * [GEOJSON](https://github.com/x6doooo/GeoMap/tree/master/json)
+* [青悦数据](http://air.epmap.org/stations?name=%E4%B8%8A%E6%B5%B7%E5%B8%82)
