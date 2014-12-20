@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>D3 Demo</title>
+  <script type="text/javascript" src="d3.min.js"></script>
+</head>
+<body>
+  <script type="text/javascript">
+    var w = 960
+    var h = 600
+    var barPadding = 1
+
+    // var dataset = [ 5, 10, 15, 20, 25 ];
+    var data = d3.csv('https://raw.githubusercontent.com/Wiredcraft/demo-d3/master/data/shanghai_air.csv', function(data) {
+      var svg = d3.select('body').append('svg')
+          .attr('width', w)
+          .attr('height', h)
+
+      svg.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", function(d, i) {
+          return i * (w / data.length);
+        })
+        .attr("y", 0)
+        .attr("width", 1)
+        .attr("height", function(d) {
+          return d['AQI']
+        });
+    })
+
+  </script>
+</body>
+</html>
