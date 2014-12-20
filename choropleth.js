@@ -41,7 +41,7 @@ var Choropleth = function(json, options) {
       d3.select(this).transition().duration(300).style('opacity', 1)
       d3.select('body').selectAll('div.tooltip').remove()
       tooltip = d3.select('body').append('div')
-        .attr('class', 'tooltip')
+        .attr('class', 'tooltip choropleth')
         .style('opacity', 0)
     })
     .on('mousemove', function(d) {
